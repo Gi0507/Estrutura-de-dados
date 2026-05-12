@@ -1,10 +1,4 @@
-#include <stdio.h>
-#include "MINHABIB.h"
 
-void imprimir_nos_internos(No* raiz) {
-    if (raiz == NULL) return;
-
-    if (raiz->esq != NULL || raiz->dir != NULL)
         printf("%d (%p) ", raiz->valor, (void*)raiz);
 
     imprimir_nos_internos(raiz->esq);
