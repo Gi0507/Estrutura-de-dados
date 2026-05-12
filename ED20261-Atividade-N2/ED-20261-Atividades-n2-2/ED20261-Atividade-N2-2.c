@@ -196,3 +196,12 @@ for (int i = 0; i <= altSub; i++) {
 printf("\nBalanceamento AVL:\n");
 verificar_balanceamento(raiz);
 }
+int main(){
+    struct No* raiz = criarNo(20);
+    raiz->esq = criarNo(10);
+    raiz->esq->esq = criarNo(5);
+    raiz->esq->esq->esq = criarNo(2);
+
+  
+    verificar_balanceamento(raiz);
+}
