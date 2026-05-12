@@ -1,7 +1,21 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "MINHABIB.h"
 
-void imprimir_nos_internos(No* raiz) {
+struct No {
+    int valor;
+    int altura; 
+    struct No *esq;
+    struct No *dir;
+};
+struct No* criarNo(int valor) {
+    struct No* novo = (struct No*) malloc(sizeof(struct No));
+    novo->valor = valor;
+    novo->esq = NULL;
+    novo->dir = NULL;
+    return novo;
+}
+void imprimir_nos_internos(struct No* raiz) {
     if (raiz == NULL) return;
 
     if (raiz->esq != NULL || raiz->dir != NULL)
@@ -11,7 +25,7 @@ void imprimir_nos_internos(No* raiz) {
     imprimir_nos_internos(raiz->dir);
 }
 
-void imprimir_folhas(No* raiz) {
+void imprimir_folhas(struct No* raiz) {
     if (raiz == NULL) return;
 
     if (raiz->esq == NULL && raiz->dir == NULL)
@@ -21,7 +35,7 @@ void imprimir_folhas(No* raiz) {
     imprimir_folhas(raiz->dir);
 }
 
-void imprimir_niveis(No* raiz, int nivel) {
+void imprimir_niveis(struct No* raiz, int nivel) {
     if (raiz == NULL) return;
 
     if (nivel == 0)
@@ -32,7 +46,7 @@ void imprimir_niveis(No* raiz, int nivel) {
     }
 }
 
-int calcular_altura(No* no) {
+int calcular_altura(struct No* no) {
     if (no == NULL) return -1;
 
     int esq = calcular_altura(no->esq);
@@ -41,7 +55,7 @@ int calcular_altura(No* no) {
     return (esq > dir ? esq : dir) + 1;
 }
 
-int calcular_profundidade(No* raiz, int valor, int nivel) {
+int calcular_profundidade(struct No* raiz, int valor, int nivel) {
     if (raiz == NULL) return -1;
 
     if (raiz->valor == valor)
@@ -53,7 +67,7 @@ int calcular_profundidade(No* raiz, int valor, int nivel) {
         return calcular_profundidade(raiz->dir, valor, nivel + 1);
 }
 
-void imprimir_ancestrais(No* raiz, int valor) {
+void imprimir_ancestrais(struct No* raiz, int valor) {
     if (raiz == NULL) return;
 
     if (raiz->valor == valor) return;
@@ -69,7 +83,7 @@ void imprimir_ancestrais(No* raiz, int valor) {
         imprimir_ancestrais(raiz->dir, valor);
 }
 
-void imprimir_descendentes(No* no) {
+void imprimir_descendentes(struct No* no) {
     if (no == NULL) return;
 
     if (no->esq) {
@@ -82,7 +96,7 @@ void imprimir_descendentes(No* no) {
         imprimir_descendentes(no->dir);
     }
 }
-int fator_balanceamento(No* no) {
+int fator_balanceamento(struct No* no) {
     if (no == NULL)
         return 0;
 
@@ -90,7 +104,7 @@ int fator_balanceamento(No* no) {
            calcular_altura(no->dir);
 }
 
-void verificar_balanceamento(No* no) {
+void verificar_balanceamento(struct No* no) {
     if (no == NULL)
         return;
 
@@ -109,7 +123,7 @@ void verificar_balanceamento(No* no) {
     verificar_balanceamento(no->dir);
 }
 
-void analisar_arvore(No* raiz, int valorBusca) {
+void analisar_arvore(struct No* raiz, int valorBusca) {
     printf("Raiz: %d (%p)\n", raiz->valor, (void*)raiz);
 
     printf("Nos internos: ");
@@ -128,7 +142,7 @@ void analisar_arvore(No* raiz, int valorBusca) {
         printf("\n");
     }
 
-    No* atual = raiz;
+    struct No* atual = raiz;
 
     while (atual != NULL && atual->valor != valorBusca) {
         if (valorBusca < atual->valor)
@@ -171,7 +185,7 @@ void analisar_arvore(No* raiz, int valorBusca) {
     }
     printf("\nSubarvore:\n");
 
-int altSub = calcular_altura(atual);
+    altSub = calcular_altura(atual);
 
 for (int i = 0; i <= altSub; i++) {
     printf("Nivel %d: ", i);
@@ -181,4 +195,13 @@ for (int i = 0; i <= altSub; i++) {
 
 printf("\nBalanceamento AVL:\n");
 verificar_balanceamento(raiz);
+}
+int main(){
+    struct No* raiz = criarNo(20);
+    raiz->esq = criarNo(10);
+    raiz->esq->esq = criarNo(5);
+    raiz->esq->esq->esq = criarNo(2);
+
+  
+    verificar_balanceamento(raiz);
 }
