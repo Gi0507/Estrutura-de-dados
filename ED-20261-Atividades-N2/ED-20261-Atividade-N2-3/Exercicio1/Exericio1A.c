@@ -1,3 +1,4 @@
+RA:2040482513020 Giovanne Crispim de Lima
 #include <stdio.h> 
 
 void troca(int *a, int *b) {
