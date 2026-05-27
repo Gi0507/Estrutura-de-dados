@@ -1,29 +1,10 @@
 RA:2040482513020 Giovanne Crispim de Lima
 #include <stdio.h> 
 
-void troca(int *a, int *b) {
-
-    printf("\nValor de a: %d\nEndereco de a: %p\n", *a, a);
-    printf("\nValor de b: %d\nEndereco de b: %p\n", *b, b);
-    printf("\n\n%d + %d = %d\n", *a, *b, *a + *b    );
-    *a = *a+*b;
-    printf("\nValor de a: %d\nEndereco de a: %p\n", *a, a);
-    printf("\nValor de b: %d\nEndereco de b: %p\n", *b, b);
-
-    printf("\n\n%d - %d = %d\n", *a, *b, *a - *b    );
-    *b = *a-*b;
-    printf("\nValor de b: %d\nEndereco de b: %p\n", *b, b);
-    printf("\nValor de a: %d\nEndereco de a: %p\n", *a, a);
-
-    printf("\n\n%d - %d = %d\n", *a, *b, *a - *b    );
-    *a = *a-*b;
-    printf("\nValor de a: %d\nEndereco de a: %p\n", *a, a);
-    printf("\nValor de b: %d\nEndereco de b: %p\n", *b, b);
-}
 int main() {
-    int x = 5, y = 10;
-    printf("\nValor de x: %d\nEndereco de x: %p\n", x, &x);
-    printf("\nValor de y: %d\nEndereco de y: %p\n", y, &y);
-    troca(&x, &y);
+    int x[]= {10,20,30,40,50};
+    for(int i=0;i<5;i++){
+        printf("\nValor de x: %d\nEndereco de x: %p\n", x, &x);
+    }
     return 0;
 }

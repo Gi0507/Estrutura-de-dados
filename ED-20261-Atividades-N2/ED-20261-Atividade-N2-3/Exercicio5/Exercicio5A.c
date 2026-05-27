@@ -27,7 +27,7 @@ int altura(no *raiz) {
     int alturaDireita = altura(raiz->direita);
     return (alturaEsquerda > alturaDireita ? alturaEsquerda : alturaDireita) + 1;
 }
-int profundidade(no *raiz) {
+int profundidade(no *raiz,int valor,int profundidade) {
     if (raiz == NULL) {
         return -1;
     }
@@ -43,7 +43,7 @@ int grau(no *raiz) {
     int grauDireita = grau(raiz->direita);
     return (grauEsquerda > grauDireita ? grauEsquerda : grauDireita) + 1;
 }
-int alturatotal(no *raiz) {
+int altura(no *raiz) {
     if (raiz == NULL) {
         return -1;
     }
